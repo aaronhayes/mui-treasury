@@ -87,7 +87,7 @@ const PageFooter = () => {
             <Typography variant={'overline'}>A little bit about me</Typography>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             <h3>Hi, I'm siriwatknp</h3>
-            <p>A Junior Web Design & Developer. Love UI, React & Firebase</p>
+            <p>Junior UI Engineer, unleash the best interface</p>
             <Box mx={{ xs: 0, sm: -2 }}>
               <Grid container spacing={2}>
                 {links.map(({ href, icon, ariaLabel }) => (
