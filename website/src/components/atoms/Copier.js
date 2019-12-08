@@ -4,10 +4,15 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const Copier = ({ text, children }) => {
   const [copied, setCopied] = useState(false);
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (copied) setCopied(false);
+    }, 1500);
+    return () => clearTimeout(timeout);
+  }, [copied, setCopied]);
   const handleCopy = (t, result) => {
     if (result) {
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
     }
   };
   return (

@@ -109,7 +109,7 @@ const DemoSourceDrawer = ({ title, frameProps }) => {
   return (
     <Consumer>
       {({ Component, setComponent }) => {
-        const { metadata = {} } = Component;
+        const { metadata = {}, raw_js: rawSource } = Component;
         const isOpen = Object.keys(metadata).length > 0;
         const {
           files = [],
@@ -151,7 +151,11 @@ const DemoSourceDrawer = ({ title, frameProps }) => {
                 <ModuleProjector
                   files={mappedFiles}
                   demoSource={
-                    <SourceFile match={metadata.path} fileName={'Demo.js'} />
+                    <SourceFile
+                      match={metadata.path}
+                      fileName={'Demo.js'}
+                      source={rawSource}
+                    />
                   }
                 />
               </Box>

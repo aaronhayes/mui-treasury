@@ -6,7 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import Drawer from '@material-ui/core/Drawer';
 import CodeRounded from '@material-ui/icons/CodeRounded';
 import SourceFile from './SourceFile';
-import FrontMatter from './FrontMatter';
+import LayoutFrontMatter from './LayoutFrontMatter';
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   sourceTrigger: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   },
 }));
 
-const SourceFileDrawer = ({ metadata }) => {
+const SourceFileDrawer = ({ metadata, source }) => {
   const [open, setOpen] = React.useState(false);
   const styles = useStyles();
   return (
@@ -36,9 +36,10 @@ const SourceFileDrawer = ({ metadata }) => {
             <h2 style={{ margin: 0 }}>How to use</h2>
           </Box>
           <SourceFile
-            component={FrontMatter.Layout}
+            component={LayoutFrontMatter}
             match={metadata.path}
             fileName={`${metadata.title}.js`}
+            source={source}
           />
         </Box>
       </Drawer>
@@ -54,6 +55,7 @@ SourceFileDrawer.propTypes = {
     title: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
   }).isRequired,
+  source: PropTypes.string.isRequired,
 };
 
 export default SourceFileDrawer;

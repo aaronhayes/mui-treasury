@@ -1,9 +1,11 @@
 import getDefaultScreenConfig from '../utils/getDefaultScreenConfig';
+import getAddOnConfig from '../utils/getAddOnConfig';
 
 export default {
-  autoCollapseDisabled: false,
-  collapsedBreakpoint: 'sm',
-  heightAdjustmentDisabled: false,
+  ...getAddOnConfig({
+    collapsedBreakpoint: 'sm',
+    secondaryCollapseBreakpoint: 'sm',
+  }),
   xs: getDefaultScreenConfig({
     header: {
       position: 'relative',
@@ -18,16 +20,13 @@ export default {
     header: {
       position: 'relative',
       clipped: false,
-      persistentPushed: true,
-      persistentScreenFit: false,
+      persistentBehavior: 'flexible',
     },
     content: {
-      persistentPushed: true,
-      persistentScreenFit: false,
+      persistentBehavior: 'flexible',
     },
     footer: {
-      persistentPushed: true,
-      persistentScreenFit: false,
+      persistentBehavior: 'flexible',
     },
   }),
 };
