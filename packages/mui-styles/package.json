@@ -1,15 +1,16 @@
 {
   "name": "@mui-treasury/styles",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "./src/index.js",
   "author": "siriwatknp <siriwatkunaporn@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@mui-treasury/utils": "^0.3.5",
+    "@mui-treasury/utils": "^0.3.6",
     "color": "^3.1.2"
   },
   "scripts": {
     "prebuild": "rimraf build",
+    "postpublish": "rimraf build",
     "build": "cross-env NODE_ENV=production babel --config-file ../../babel-config.js ./src --out-dir ./build --ignore \"**/*.test.js\"",
     "prepublishOnly": "yarn copy-files",
     "copy-files": "node ../../scripts/copy-files.js"

@@ -1,6 +1,6 @@
 {
   "name": "@mui-treasury/styling",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "main": "./src/index.js",
   "author": "siriwatknp <siriwatkunaporn@gmail.com>",
   "license": "MIT",
@@ -12,6 +12,7 @@
   },
   "scripts": {
     "prebuild": "rimraf build",
+    "postpublish": "rimraf build",
     "build": "cross-env NODE_ENV=production babel --config-file ../../babel-config.js ./src --out-dir ./build --ignore \"**/*.test.js\"",
     "prepublishOnly": "yarn copy-files",
     "copy-files": "node ../../scripts/copy-files.js"

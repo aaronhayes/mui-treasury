@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { useLayoutCtx } from '../hooks';
-import { useTransitionStyles } from '../styles';
+import { useLayoutCtx, useInsetBreakpoint } from '../hooks';
+import { transitionStyles } from '../styles';
+import upperFirst from '../utils/upperFirst';
 
 const useStyles = makeStyles(({ breakpoints, palette, spacing }) => ({
   root: {
@@ -16,19 +17,30 @@ const useStyles = makeStyles(({ breakpoints, palette, spacing }) => ({
   },
 }));
 
+const useTransitionStyles = makeStyles(transitionStyles);
+
 const Footer = ({ className, component: Component, style, ...props }) => {
   const ctx = useLayoutCtx();
-  const { getSidebarGap, getWidth, footer } = ctx;
+  const { getFooterStyle, sidebar, secondarySidebar } = ctx;
+  const { isTargetDown, insetHiddenDisabled } = useInsetBreakpoint(ctx);
   const styles = useStyles(props);
-  const transitionStyles = useTransitionStyles();
+  const transition = useTransitionStyles();
+  const footerStyle = getFooterStyle();
+  if (isTargetDown && !insetHiddenDisabled) {
+    if (sidebar.inset) {
+      delete footerStyle[`margin${upperFirst(sidebar.anchor)}`];
+    }
+    if (secondarySidebar.inset) {
+      delete footerStyle[`margin${upperFirst(secondarySidebar.anchor)}`];
+    }
+  }
   return (
     <Component
       {...props}
-      className={cx(styles.root, transitionStyles.root, className)}
+      className={cx(styles.root, transition.root, className)}
       style={{
         ...style,
-        marginLeft: getSidebarGap(footer),
-        width: getWidth(footer),
+        ...footerStyle,
       }}
     />
   );
